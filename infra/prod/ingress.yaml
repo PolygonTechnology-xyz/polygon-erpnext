@@ -1,0 +1,26 @@
+---
+# Source: erpnext/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: erp-example-com
+  labels:
+    helm.sh/chart: erpnext-7.0.135
+    app.kubernetes.io/name: erpnext
+    app.kubernetes.io/instance: frappe-bench
+    app.kubernetes.io/version: "v15.42.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: "erp.example.com"
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: frappe-bench-erpnext
+                port:
+                  number: 8080

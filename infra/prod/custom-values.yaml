@@ -1,0 +1,26 @@
+persistence:
+  worker:
+    storageClass: "longhorn"
+
+mariadb:
+  enabled: true
+
+global:
+  storageClass: "longhorn"
+
+jobs:
+  createSite:
+    enabled: true
+    siteName: "erp.example.com"
+    adminPassword: "secret"
+
+ingress:
+  enabled: true
+  ingressName: "erp-example-com"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: erp.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
